@@ -1,5 +1,13 @@
 ﻿@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap");
 
+$base-background: hsl(240, 78%, 98%);
+$light-accent: hsl(234, 14%, 74%);
+$medium-accent: hsl(233, 13%, 49%);
+$strong-accent: hsl(232, 13%, 33%);
+$blue-accent: hsl(237, 63%, 64%);
+
+$breakpoint-mobile: 375px;
+
 *,
 *::after,
 *::before {
@@ -10,96 +18,101 @@ body {
   background: url("../images/bg-top.svg") no-repeat,
     url("../images/bg-bottom.svg") no-repeat;
   background-position: top right, bottom left;
-  background-color: hsl(240, 78%, 98%);
+  background-color: $base-background;
   background-size: 25%;
   font-size: 15px;
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
-  height: 100vh;
-  color: hsl(233, 13%, 49%);
+  color: $medium-accent;
   display: flex;
   flex-direction: column;
 }
+
 .wrapper {
   display: flex;
-  margin: 90px auto 0;
+  margin: 4vw auto 0;
   flex-direction: column;
   align-items: center;
-}
-.title {
-  margin: 10px 0 40px;
-  padding: 10px;
-  font-size: 2rem;
-}
-.switch {
-  margin-bottom: 50px;
-  color: hsl(234, 14%, 74%);
-  display: flex;
-  align-items: center;
-}
-.toggle {
-  margin: 0 35px;
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-}
 
-.toggle input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
+  .title {
+    margin: 10px 0 3vw;
+    padding: 10px;
+    font-size: 2rem;
+  }
+  .switch {
+    margin-bottom: 4vw;
+    color: hsl(234, 14%, 74%);
+    display: flex;
+    align-items: center;
 
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  transition: 0.4s;
-  background: linear-gradient(hsl(236, 72%, 79%), hsl(237, 63%, 64%));
+    .toggle {
+      margin: 0 35px;
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+    }
 
-  &:before {
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    -webkit-transition: 0.4s;
-    transition: 0.4s;
+    .toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      transition: 0.4s;
+      background: linear-gradient(hsl(236, 72%, 79%), hsl(237, 63%, 64%));
+
+      &:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: 0.4s;
+        transition: 0.4s;
+      }
+    }
+
+    input:checked + .slider {
+      opacity: 0.5;
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+      border-radius: 34px;
+    }
+
+    .slider.round:before {
+      border-radius: 50%;
+    }
   }
 }
 
-input:checked + .slider {
-  opacity: 0.5;
-}
-
-input:checked + .slider:before {
-  transform: translateX(26px);
-}
-
-/* Rounded sliders */
-.slider.round {
-  border-radius: 34px;
-}
-
-.slider.round:before {
-  border-radius: 50%;
-}
 .pricing__wrapper {
+  width: 90vw;
   display: flex;
   flex-wrap: wrap;
-  flex-shrink: 0;
+  // flex-shrink: 1;
   justify-content: center;
   align-items: center;
 
   .left,
   .center,
   .right {
+    flex-grow: 1;
     margin-bottom: 30px;
     position: relative;
     display: flex;
@@ -107,7 +120,7 @@ input:checked + .slider:before {
     text-align: center;
     justify-content: center;
     height: 460px;
-    width: 350px;
+    max-width: 350px;
     border-radius: 10px;
     box-shadow: 0px 8px 18px 0px rgba(155, 155, 155, 0.34);
     background: white;
@@ -184,9 +197,9 @@ input:checked + .slider:before {
       transition: 0.4s linear;
 
       &:hover {
-        border: 1px solid hsl(237, 63%, 64%);
+        border: 1px solid $blue-accent;
         background: none;
-        color: hsl(237, 63%, 64%);
+        color: $blue-accent;
       }
     }
   }
@@ -196,16 +209,8 @@ input:checked + .slider:before {
     height: 500px;
     background: linear-gradient(hsl(236, 72%, 79%), hsl(237, 63%, 64%));
 
-    .price__area {
-      color: white;
-
-      .price {
-        color: white;
-      }
-    }
-
     .btn {
-      color: hsl(237, 63%, 64%);
+      color: $blue-accent;
       position: relative;
       border: none;
       letter-spacing: 1px;
@@ -213,19 +218,26 @@ input:checked + .slider:before {
 
       &:hover {
         border: 1px solid white;
-        background: none;
         color: white;
       }
     }
   }
 }
 
-.attribution {
+footer {
   width: 100%;
-  margin: 40px 0 30px;
-  font-size: 11px;
-  text-align: center;
+
+  .attribution {
+    font-size: 11px;
+    text-align: center;
+  }
+  .attribution a {
+    color: #3e52a3;
+  }
 }
-.attribution a {
-  color: hsl(228, 45%, 44%);
+
+@media (max-width: $breakpoint-mobile) {
+  .wrapper {
+    margin: 30px auto 0;
+  }
 }
